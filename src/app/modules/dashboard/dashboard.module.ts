@@ -4,6 +4,7 @@ import { DasboardComponent } from './pages/dasboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { CategoriModule } from '../categoria/categoria.module';
 
 
 
@@ -13,7 +14,8 @@ import { SharedModule } from '../shared/shared.module';
     HomeComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    CategoriModule
   ]
 })
 export class DashboardModule { }
