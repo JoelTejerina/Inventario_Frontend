@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmacionComponent } from 'src/app/modules/shared/components/confirmacion/confirmacion.component';
@@ -21,6 +22,9 @@ export class CategoriaComponent implements OnInit {
   }
   displayedColumns: string[] = ['idCategoria', 'nombre', 'descripcion', 'acciones'];
   dataSource = new MatTableDataSource<CategoriaElement>();
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
   getCategorias(){
 
@@ -49,7 +53,8 @@ export class CategoriaComponent implements OnInit {
       });
     }
 
-    this.dataSource = new MatTableDataSource<CategoriaElement>(dataCategory);   
+    this.dataSource = new MatTableDataSource<CategoriaElement>(dataCategory);
+    this.dataSource.paginator = this.paginator;   
   }
 
   abrirCategoriaDialog(){
@@ -111,9 +116,9 @@ export class CategoriaComponent implements OnInit {
     }
 
     this.categoriaService.getCategoriaPorId(termino)
-    .subscribe((rest:any) => {
-      this.processCategoriesResponse(rest);
-    })
+          .subscribe((rest:any) => {
+            this.processCategoriesResponse(rest);
+          })
   }
 
   abrirSnackBar(mensaje: string, accion: string) : MatSnackBarRef<SimpleSnackBar>{
