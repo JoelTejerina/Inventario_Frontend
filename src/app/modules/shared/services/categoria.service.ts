@@ -21,4 +21,9 @@ export class CategoriaService {
     const endpoint = `${base_url}/categorias`;
     return this.http.post(endpoint, Body);
   }
+
+  actualizarCategoria(Body: any, idCategoria: any){
+    const endpoint = `${base_url}/categorias/ ${idCategoria}`;
+    return this.http.put(endpoint, Body);
+  }
 }

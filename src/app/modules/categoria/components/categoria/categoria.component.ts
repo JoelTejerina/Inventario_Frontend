@@ -59,11 +59,29 @@ export class CategoriaComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result:any)=> {
       
       if (result == 1) {
-        this.abrirSnackBar("Categoria Agregada", "Exitosa");
+        this.abrirSnackBar("Categoria agregada", "Exitosa");
         this.getCategorias();
 
       }else if (result == 2){
         this.abrirSnackBar("Se produjo en error al guardar categoria", "Error");
+      }
+    });
+  }
+
+  editar(idCategoria:number, nombre: string, descripcion: string){
+    const dialogRef = this.dialog.open(NuevaCategoriaComponent, {
+      width: '450px',
+      data: {idCategoria: idCategoria, nombre: nombre, descripcion: descripcion}
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      
+      if (result == 1) {
+        this.abrirSnackBar("Categoria actuazalida", "Exitosa");
+        this.getCategorias();
+
+      }else if (result == 2){
+        this.abrirSnackBar("Se produjo en error al actualizar categoria", "Error");
       }
     });
   }
