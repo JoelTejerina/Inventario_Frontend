@@ -5,12 +5,14 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 
 
 
 @NgModule({
   declarations: [
-    SidenavComponent
+    SidenavComponent,
+    ConfirmacionComponent
   ],
   exports: [
     SidenavComponent
