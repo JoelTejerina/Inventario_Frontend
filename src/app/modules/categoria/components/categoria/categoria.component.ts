@@ -32,28 +32,27 @@ export class CategoriaComponent implements OnInit {
         .subscribe( (data:any) => {
 
           console.log("respuesta categories: ", data);
-          this.processCategoriesResponse(data);
+          this.procesarCategoriasResponse(data);
 
         }, (error: any) => {
           console.log("error: ", error);
         })
   }
 
-  processCategoriesResponse(resp: any){
+  procesarCategoriasResponse(resp: any){
 
-    const dataCategory: CategoriaElement[] = [];
+    const dataCategoria: CategoriaElement[] = [];
 
     if( resp.metadata[0].codigo == "200") {
 
-      let listCategory = resp.categoriaResponse.categorias;
+      let listCategoria = resp.categoriaResponse.categorias;
 
-      console.log("array ", listCategory) 
-      listCategory.forEach((element: CategoriaElement) => {
-        dataCategory.push(element);
+      listCategoria.forEach((element: CategoriaElement) => {
+        dataCategoria.push(element);
       });
     }
 
-    this.dataSource = new MatTableDataSource<CategoriaElement>(dataCategory);
+    this.dataSource = new MatTableDataSource<CategoriaElement>(dataCategoria);
     this.dataSource.paginator = this.paginator;   
   }
 
@@ -117,7 +116,7 @@ export class CategoriaComponent implements OnInit {
 
     this.categoriaService.getCategoriaPorId(termino)
           .subscribe((rest:any) => {
-            this.processCategoriesResponse(rest);
+            this.procesarCategoriasResponse(rest);
           })
   }
 
