@@ -34,6 +34,11 @@ export class NuevoProductoComponent implements OnInit {
         categoria: ['', Validators.required],
         imagen: ['', Validators.required]
       });
+
+      if (data != null) {
+        this.actualizarForm(data);
+        this.estadoFormulario = "Actualizar";
+      }
     }
     
     ngOnInit(): void {
@@ -56,12 +61,22 @@ export class NuevoProductoComponent implements OnInit {
       subirImagenData.append('cantidad', data.cantidad);
       subirImagenData.append('idCategoria', data.categoria);
 
-      this.productoService.guardarProducto(subirImagenData)
-                .subscribe((data: any) => {
-                  this.dialogRef.close(1);
-                }), (error:any) => {
-                  this.dialogRef.close(2);
-                }
+      if(this.data != null){
+        this.productoService.actualizarProducto(subirImagenData, this.data.idProducto)
+                  .subscribe((data: any) => {
+                    this.dialogRef.close(1);
+                  }), (error:any) => {
+                    this.dialogRef.close(2);
+                  }
+      }else{
+
+        this.productoService.guardarProducto(subirImagenData)
+                  .subscribe((data: any) => {
+                    this.dialogRef.close(1);
+                  }), (error:any) => {
+                    this.dialogRef.close(2);
+                  }
+      }
 
     }
 
@@ -78,11 +93,20 @@ export class NuevoProductoComponent implements OnInit {
       }
     }
 
-    onFileChanged(event: any){
+    onFileChanged(event:any){
       this.seleccionarFile = event.target.files[0];
       console.log(this.seleccionarFile);
 
       this.nombreImagen = event.target.files[0].name;
+    }
+
+    actualizarForm(data:any){
+      this.productoForm = this.fb.group( {
+        nombre: [data.nombre, Validators.required],
+        precio: [data.precio, Validators.required],
+        cantidad: [data.cantidad, Validators.required],
+        categoria: [data.categoria.idCategoria, Validators.required]
+      });
     }
 
 }

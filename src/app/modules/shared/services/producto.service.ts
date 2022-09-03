@@ -21,4 +21,9 @@ export class ProductoService {
     const endpoint = `${base_url}/productos`;
     return this.http.post(endpoint, Body);
   }
+
+  actualizarProducto(Body: any, idProducto: any){
+    const endpoint = `${base_url}/productos/ ${idProducto}`;
+    return this.http.put(endpoint, Body);
+  }
 }
