@@ -94,7 +94,7 @@ export class CategoriaComponent implements OnInit {
   eliminar(idCategoria: any){
     const dialogRef = this.dialog.open(ConfirmacionComponent, {
       width: '450px',
-      data: {idCategoria: idCategoria}
+      data: {idCategoria: idCategoria, module: "categoria"}
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmacionComponent } from '../../shared/components/confirmacion/confirmacion.component';
 import { ProductoService } from '../../shared/services/producto.service';
 import { NuevoProductoComponent } from '../nuevo-producto/nuevo-producto.component';
 
@@ -92,6 +93,24 @@ export class ProductoComponent implements OnInit {
 
       }else if (result == 2){
         this.abrirSnackBar("Se produjo en error al editar producto", "Error");
+      }
+    });
+  }
+
+  eliminar(idProducto: any){
+    const dialogRef = this.dialog.open( ConfirmacionComponent, {
+      width: '450px',
+      data: {idProducto: idProducto, module: "producto"}
+    });
+
+    dialogRef.afterClosed().subscribe((result:any)=> {
+      
+      if (result == 1) {
+        this.abrirSnackBar("Producto eliminado", "Exitosa");
+        this.getProductos();
+
+      }else if (result == 2){
+        this.abrirSnackBar("Se produjo en error al eliminar producto", "Error");
       }
     });
   }
