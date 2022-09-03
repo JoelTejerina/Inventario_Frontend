@@ -31,4 +31,9 @@ export class ProductoService {
     const endpoint = `${base_url}/productos/ ${idProducto}`;
     return this.http.delete(endpoint);
   }
+
+  getBuscarProductoPorNombre(nombre: any){
+    const endpoint = `${base_url}/productos/nombre/${nombre}`;
+    return this.http.get(endpoint);
+  }
 }

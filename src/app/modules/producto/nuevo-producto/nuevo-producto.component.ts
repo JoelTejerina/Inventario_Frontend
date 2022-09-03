@@ -68,8 +68,7 @@ export class NuevoProductoComponent implements OnInit {
                   }), (error:any) => {
                     this.dialogRef.close(2);
                   }
-      }else{
-
+      }else {
         this.productoService.guardarProducto(subirImagenData)
                   .subscribe((data: any) => {
                     this.dialogRef.close(1);
