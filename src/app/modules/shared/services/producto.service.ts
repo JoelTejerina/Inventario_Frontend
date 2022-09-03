@@ -16,4 +16,9 @@ export class ProductoService {
     const endpoint = `${base_url}/productos`;
     return this.http.get(endpoint);
   }
+
+  guardarProducto(Body: any){
+    const endpoint = `${base_url}/productos`;
+    return this.http.post(endpoint, Body);
+  }
 }
