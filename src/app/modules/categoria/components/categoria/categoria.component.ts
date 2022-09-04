@@ -5,6 +5,7 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmacionComponent } from 'src/app/modules/shared/components/confirmacion/confirmacion.component';
 import { CategoriaService } from 'src/app/modules/shared/services/categoria.service';
+import { UtilityService } from 'src/app/modules/shared/services/utility.service';
 import { NuevaCategoriaComponent } from '../nueva-categoria/nueva-categoria.component';
 
 @Component({
@@ -14,12 +15,18 @@ import { NuevaCategoriaComponent } from '../nueva-categoria/nueva-categoria.comp
 })
 export class CategoriaComponent implements OnInit {
 
+  esAdmin: any;
+
   constructor(private categoriaService: CategoriaService,
-              public dialog: MatDialog, private snackBar: MatSnackBar) { }
+              public dialog: MatDialog, private snackBar: MatSnackBar,
+              private utilityService: UtilityService) { }
 
   ngOnInit(): void {
     this.getCategorias();
+    console.log(this.utilityService.getRoles());
+    this.esAdmin = this.utilityService.esAdmin();
   }
+
   displayedColumns: string[] = ['idCategoria', 'nombre', 'descripcion', 'acciones'];
   dataSource = new MatTableDataSource<CategoriaElement>();
 

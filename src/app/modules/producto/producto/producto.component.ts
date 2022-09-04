@@ -5,6 +5,7 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/s
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmacionComponent } from '../../shared/components/confirmacion/confirmacion.component';
 import { ProductoService } from '../../shared/services/producto.service';
+import { UtilityService } from '../../shared/services/utility.service';
 import { NuevoProductoComponent } from '../nuevo-producto/nuevo-producto.component';
 
 @Component({
@@ -14,11 +15,14 @@ import { NuevoProductoComponent } from '../nuevo-producto/nuevo-producto.compone
 })
 export class ProductoComponent implements OnInit {
 
+  esAdmin: any;
   constructor(private productoService: ProductoService,
-              public dialog: MatDialog, private snackBar: MatSnackBar) { }
+              public dialog: MatDialog, private snackBar: MatSnackBar,
+              private utilitySevice: UtilityService) { }
 
   ngOnInit(): void {
     this.getProductos();
+    this.esAdmin = this.utilitySevice.esAdmin();
   }
 
 
